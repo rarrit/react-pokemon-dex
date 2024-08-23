@@ -1,21 +1,34 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { TypeAttr, TypeBg } from "../assets/js/types";
 
 const PokemonCard = ({ 
   pokemon, // 포켓몬 객체
+  selectPokemonList, // 선택된 포켓몬 리스트
   addPokemon, // 포켓몬 추가 함수
-  removePokemon, // 포켓몬 삭제 함수
+  removePokemon, // 포켓몬 삭제 함수  
   isSelected // 추가 여부 체크
 }) => {
   const filterType = TypeAttr(pokemon.types[0]);
-  const filterBg = TypeBg(filterType);
+  const pokemonBg = TypeBg(filterType);  
+
+  // 상세페이지로 이동되었을 때 이전 selectedPokemonList 상태 유지
+  const navigate = useNavigate();
+  const handleDetailClick = () => {
+    
+    navigate(`/detail/${pokemon.id}`, {
+      state: {
+        selectedPokemon: pokemon,
+        selectedPokemonList: selectPokemonList, // 선택된 포켓몬 리스트를 함께 전달
+      },
+    });
+  };
 
   return (
     <>
-      <CardItem filterBg={filterBg}>
+      <CardItem $filterBg={pokemonBg}>
         <ImgBox $imgUrl={pokemon.img_url}>
-          <Link to={`/detail/${pokemon.id}`}></Link>
+          <button onClick={handleDetailClick}>DETAIL</button>
         </ImgBox>
         <TextBox>
           <p className="pokemonName">{pokemon.korean_name}</p>
@@ -23,7 +36,7 @@ const PokemonCard = ({
         </TextBox>        
         <ButtonArea>
           <div className="inner">
-            <Link to={`/detail/${pokemon.id}`}>DETAIL</Link>
+            <button onClick={handleDetailClick}>DETAIL</button>
             {isSelected ? (
               <Button onClick={() => removePokemon(pokemon)}>REMOVE</Button>
             ) : (
@@ -45,7 +58,7 @@ const CardItem = styled.div`
   flex-direction: column;
   width:calc(20% - 20px);
   height:420px;
-  background: url(${props => props.filterBg}) no-repeat;
+  background: url(${props => props.$filterBg}) no-repeat;
   background-size:100% 100%;
 `;
 
@@ -54,10 +67,13 @@ const ImgBox = styled.div`
   height: 230px; /* 원하는 높이 */
   background: url(${props => props.$imgUrl}) no-repeat center center;
   background-size: 140px;
-  a {
+  a,button {
     display: block;
     width: 100%;
     height: 100%;
+    background:transparent;
+    border: none;
+    cursor: pointer;
   }
 `;
 
@@ -71,7 +87,7 @@ const ButtonArea = styled.div`
   box-sizing: border-box;
   .inner {
     display:flex;  
-    background:#f5483d;
+    background:#f5483d;    
     border:1px solid #000;
     > * {
       flex: 1;
@@ -79,17 +95,20 @@ const ButtonArea = styled.div`
       align-items: center;
       justify-content: center;
       height:25px;
-      text-decoration: none;    
-      cursor: pointer;    
+      text-decoration: none;  
+      background:transparent; 
+      border:none; 
+      cursor: pointer;  
+      color:#ffcc1c;  
       &:first-child {
-        color:#000;
+        color:#f5483d;
         background:#d0d9de;
       }
     }
   }  
 `
-const Button = styled.div`
-  
+const Button = styled.button`
+  border:none;
 `;
 
 const TextBox = styled.div`

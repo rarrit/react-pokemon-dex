@@ -18,7 +18,8 @@ const PokemonList = ({
                 pokemon={pokemon}                                               
                 addPokemon={addPokemon}
                 removePokemon={removePokemon}
-                isSelected={selectPokemonList.includes(pokemon)}
+                selectPokemonList={selectPokemonList}
+                isSelected={false}
               />
             )
           )

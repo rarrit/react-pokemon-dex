@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import Dashboard from "@/components/Dashboard";
 import PokemonList from "@/components/PokemonList";
+import styled from "styled-components";
+import bgImage from "/src/assets/img/bg-pokemon.jpg";
 
-const Dex = ({ pokemonList, isAnimation }) => {
+const Dex = ({ pokemonList }) => {
   // 선택한 포켓몬 리스트
-  const [selectPokemonList, setSelectPokemonList] = useState([]);
+  const [selectPokemonList, setSelectPokemonList] = useState(() => {
+    // [08-22 추가] 대시보드에 추가된 포켓몬을 유지하기 위해 로컬 스토리지를 사용함
+    const savedList = localStorage.getItem('selectPokemonList');
+    // [08-22 추가] 로컬스토리지가 있으면 저장된 값으로 업데이트, 없을경우 초기화
+    return savedList ? JSON.parse(savedList) : [];
+  });
 
+  // [08-22 추가] selectPokemonList가 변경될 때 마다 localStorage에 저장해줌
   useEffect(() => {
-    if(isAnimation) {
-      console.log("test");
-    }
-  }, [isAnimation])
+    localStorage.setItem('selectPokemonList', JSON.stringify(selectPokemonList))
+  }, [selectPokemonList])
 
   /*
    * [대시보드에 등록할 포켓몬 함수]
@@ -25,10 +31,10 @@ const Dex = ({ pokemonList, isAnimation }) => {
   */
   const addPokemonHandler = (selectedPokemon) => {
     setSelectPokemonList(prevSelectPokemonList => {
-      // if(prevSelectPokemonList.some(list => list.id === selectedPokemon.id)) {
-      //   alert("이미 등록된 포켓몬 입니다!");
-      //   return prevSelectPokemonList;
-      // }
+      if(prevSelectPokemonList.some(list => list.id === selectedPokemon.id)) {
+        alert("이미 등록된 포켓몬 입니다!");
+        return prevSelectPokemonList;
+      }
       if(prevSelectPokemonList.length < 6) {
         return [...prevSelectPokemonList, selectedPokemon];
       }else{
@@ -51,7 +57,7 @@ const Dex = ({ pokemonList, isAnimation }) => {
   }
 
   return (
-    <>
+    <DexWrap>
       <Dashboard 
         selectPokemonList={selectPokemonList}
         removePokemon={removePokemonHandler}
@@ -61,9 +67,23 @@ const Dex = ({ pokemonList, isAnimation }) => {
         addPokemon={addPokemonHandler}
         removePokemon={removePokemonHandler}
         selectPokemonList={selectPokemonList}
-      />      
-    </>
+      />  
+    </DexWrap>   
   )
 }
 
+const DexWrap = styled.div`
+  &:before {
+    content:''; 
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background:url(${bgImage}) no-repeat;
+    background-attachment : fixed;
+    background-position: bottom right;
+    background-size:100% 100%;
+  }  
+`;
 export default Dex

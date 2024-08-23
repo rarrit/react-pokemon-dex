@@ -8,8 +8,8 @@ function Header(){
       <HeaderLayout id="header">
         <div className="inner">
           <h1 className="logo">
-            <Link to="/">
-              PoKeMoN
+            <Link to="/dex">
+              <img src={logo}/>
             </Link>
           </h1>
         </div>
@@ -54,13 +54,8 @@ const HeaderLayout = styled.header`
     justify-content:center;
     .logo {
       display:inline-block;
-      a {
-        font-size:80px;
-        font-weight:bold;
-        text-decoration: none;
-        color: #ffcc1c;
-        text-shadow:-5px 0 #456bbc, 0 5px #456bbc, 5px 0 #456bbc, 0 -5px #456bbc;
-        letter-spacing: 10px;
+      img {
+        width:400px
       }
     } 
   }  

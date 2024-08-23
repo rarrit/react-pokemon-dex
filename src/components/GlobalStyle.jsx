@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components"
-import bgImage from "/src/assets/img/bg-pokemon.jpg";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -56,18 +55,15 @@ const GlobalStyle = createGlobalStyle`
   }
   body {    
     min-height: 100vh;
-    padding-top:80px;
-    background:url(${bgImage}) no-repeat;
-    background-attachment : fixed;
-    background-position: bottom right;
-    background-size:100% 100%;
+    padding-top:150px;
   }
   header {
     position: fixed;
     top:0;
     left:0;
     width:100%;
-    height:80px;
+    height:150px;
+    z-index: 9999;
   }
   #container {
     width:100%;

@@ -4,7 +4,8 @@ import PokemonCard from "./PokemonCard";
 const Dashboard = ({ 
   selectPokemonList, // 추가된 포켓몬 리스트
   removePokemon // 포켓몬 삭제 함수
-}) => {  
+}) => {
+
   return (
     <>
       <DashboardContainer>
@@ -19,7 +20,7 @@ const Dashboard = ({
                     key={pokemon.id} 
                     pokemon={pokemon}         
                     removePokemon={removePokemon}
-                    isSelected={selectPokemonList.includes(pokemon)}
+                    isSelected={true}
                   />                  
                 )
               })
