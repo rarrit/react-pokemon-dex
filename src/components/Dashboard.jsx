@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
+import { useContext } from "react";
+import { pokemonContext } from "@/context/PokemonContext";
 
-const Dashboard = ({ 
-  selectPokemonList, // 추가된 포켓몬 리스트
-  removePokemon // 포켓몬 삭제 함수
-}) => {
-
+const Dashboard = () => {
+  const {
+    selectPokemonList,
+    removePokemon
+  } = useContext(pokemonContext);
   return (
     <>
       <DashboardContainer>

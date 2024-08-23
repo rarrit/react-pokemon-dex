@@ -1,9 +1,15 @@
 // import PokemonCard from '@/components/PokemonCard';
+import { pokemonContext } from '@/context/PokemonContext';
+import { useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import bgImage from "/src/assets/img/bg-pokeball.jpg";
+import { useEffect } from 'react';
 
-const Detail = ({ pokemonList }) => {
+const Detail = () => {
+
+  const {pokemonList} = useContext(pokemonContext);
+
   // URL에서 id를 추출
   const { id } = useParams();
   // 선택된 포켓몬을 기억하기 위해 useLocation 훅 사용
@@ -12,6 +18,10 @@ const Detail = ({ pokemonList }) => {
   const { selectedPokemonList } = location.state || {}  
   // 포켓몬 목록에서 해당 id에 맞는 포켓몬을 찾기
   const selectedPokemon = pokemonList.find(pokemon => pokemon.id === parseInt(id));
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   if (!selectedPokemon) {
     return <div>포켓몬을 찾을 수 없슈.</div>;
@@ -134,7 +144,13 @@ const SelectPokemonBox = styled.div`
     font-size:18px;
     background: #ffcc1c;
     border:3px solid #456bbc;
-    padding:10px 0
+    padding:10px 0;
+    cursor:pointer;
+    &:hover {
+      background:#f5473c;
+      color:#fff;
+      transition:all .2s ease;
+    }
   }
 `;
 

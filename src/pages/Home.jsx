@@ -1,9 +1,13 @@
-import { useEffect } from "react";
+import { pokemonContext } from "@/context/PokemonContext";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
 
 
-const Home = ({ isAnimation, setIsAnimation }) => {  
+const Home = () => {  
+  const {
+    isAnimation, setIsAnimation
+  } = useContext(pokemonContext);
   const navigate = useNavigate();
 
   const startAniHandler = () => setIsAnimation(true);

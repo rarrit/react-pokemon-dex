@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useContext } from "react";
+import { pokemonContext } from "@/context/PokemonContext";
 import { TypeAttr, TypeBg } from "../assets/js/types";
+import styled from "styled-components";
+
 
 const PokemonCard = ({ 
   pokemon, // 포켓몬 객체
   selectPokemonList, // 선택된 포켓몬 리스트
-  addPokemon, // 포켓몬 추가 함수
-  removePokemon, // 포켓몬 삭제 함수  
-  isSelected // 추가 여부 체크
 }) => {
+  const {
+    addPokemonHandler, // 포켓몬 추가 함수
+    removePokemonHandler, // 포켓몬 삭제 함수  
+    isSelected // 추가 여부 체크
+  } = useContext(pokemonContext);
+
   const filterType = TypeAttr(pokemon.types[0]);
   const pokemonBg = TypeBg(filterType);  
 
@@ -28,7 +34,7 @@ const PokemonCard = ({
     <>
       <CardItem $filterBg={pokemonBg}>
         <ImgBox $imgUrl={pokemon.img_url}>
-          <button onClick={handleDetailClick}>DETAIL</button>
+          <button onClick={handleDetailClick}></button>
         </ImgBox>
         <TextBox>
           <p className="pokemonName">{pokemon.korean_name}</p>
@@ -38,9 +44,9 @@ const PokemonCard = ({
           <div className="inner">
             <button onClick={handleDetailClick}>DETAIL</button>
             {isSelected ? (
-              <Button onClick={() => removePokemon(pokemon)}>REMOVE</Button>
+              <Button onClick={() => removePokemonHandler(pokemon)}>REMOVE</Button>
             ) : (
-              <Button onClick={() => addPokemon(pokemon)}>ADD</Button>
+              <Button onClick={() => addPokemonHandler(pokemon)}>ADD</Button>
             )}
           </div>          
         </ButtonArea>
@@ -55,7 +61,7 @@ export default PokemonCard
 const CardItem = styled.div`  
   position:relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
   width:calc(20% - 20px);
   height:420px;
   background: url(${props => props.$filterBg}) no-repeat;
