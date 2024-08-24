@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Router basename="/react-pokemon-dex"/>
+      <Router basename="/react-pokemon-dex/"/>
     </>
   )    
 }
