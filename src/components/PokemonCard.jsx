@@ -1,42 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import { TypeAttr, TypeBg } from "../assets/js/types";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { addPokemon, removePokemon } from "@/feature/pokemons/pokemonsSlice";
+import styled from "styled-components";
 
 
-const PokemonCard = ({ 
-  pokemon, // 포켓몬 객체
-  isSelected // 추가 여부 체크
-}) => {
-
+const PokemonCard = ({ pokemon  }) => {
   const dispatch = useDispatch();
-  const selectPokemonList = useSelector(state => state.pokemons.selectedPokemonList);
+  const navigate = useNavigate();  
+  const selectPokemonList = useSelector(state => state.pokemons.selectPokemonList);
+  const isSelected = selectPokemonList.find(list => list.id === parseInt(pokemon.id));
   const filterType = TypeAttr(pokemon.types[0]);
   const pokemonBg = TypeBg(filterType);    
-  const navigate = useNavigate();
-  
-  const handleDetailClick = () => {    
-    navigate(`/detail/${pokemon.id}`, {
-      state: {
-        selectedPokemon: pokemon,
-        selectedPokemonList: selectPokemonList, // 선택된 포켓몬 리스트를 함께 전달
-      },
-    });
-  };
-
-  const handleAddPokemon = (pokemon) => {
-    dispatch(addPokemon(pokemon));
-    // console.log("추가", pokemon);
-  }
-  const handleRemovePokemon = (pokemon) => {
-    dispatch(removePokemon(pokemon));
-  }
-
+    
+  const handleDetailClick = () => navigate(`/detail/${pokemon.id}`);
+  const handleAddPokemon = (pokemon) => dispatch(addPokemon(pokemon));    
+  const handleRemovePokemon = (pokemon) => dispatch(removePokemon(pokemon));
 
   return (
     <>
-      <CardItem $filterBg={pokemonBg}>
+      <CardItem $filterBg={pokemonBg} className={!isSelected ? "" : "selected"}>
         <ImgBox $imgUrl={pokemon.img_url}>
           <button onClick={handleDetailClick}></button>
         </ImgBox>
@@ -99,6 +82,8 @@ const ButtonArea = styled.div`
     display:flex;  
     background:#f5483d;    
     border:1px solid #000;
+    border-radius:50px;
+    overflow: hidden;
     > * {
       flex: 1;
       display:flex;

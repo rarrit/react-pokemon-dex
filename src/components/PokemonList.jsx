@@ -13,8 +13,7 @@ const PokemonList = () => {
             (
               <PokemonCard                 
                 key={pokemon.id} 
-                pokemon={pokemon}
-                isSelected={false}
+                pokemon={pokemon}                
               />
             )
           )
@@ -30,4 +29,15 @@ const ListContainer = styled.div`
   display:flex;
   flex-wrap:wrap;
   gap:20px;
+  > div {
+    transition:all .3s ease;
+    &:hover {
+      transform: translateY(-10px);
+    }
+    &.selected {
+      transform: scale(.85);
+      box-shadow: .5px .5px 25px #ffc887;
+      border-radius:12px
+    }
+  }
 `;

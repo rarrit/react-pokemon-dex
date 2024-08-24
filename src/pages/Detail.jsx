@@ -1,35 +1,33 @@
 // import PokemonCard from '@/components/PokemonCard';
 import { useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {  useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import bgImage from "/src/assets/img/bg-pokeball.jpg";
+import detailImg from "/src/assets/img/bg-pokemon-detail.png";
 import styled from 'styled-components';
+import { addPokemon, removePokemon } from "@/feature/pokemons/pokemonsSlice";
 
 const Detail = () => {
 
   const pokemonList = useSelector(state => state.pokemons.pokemonList);  
-
-  const { id } = useParams();
-  const location = useLocation();
+  const selectPokemonList = useSelector(state => state.pokemons.selectPokemonList);
+  const dispatch = useDispatch();    
   const navigate = useNavigate();
-  const { selectedPokemonList } = location.state || {}  
-  // 포켓몬 목록에서 해당 id에 맞는 포켓몬을 찾기
-  const selectedPokemon = pokemonList.find(pokemon => pokemon.id === parseInt(id));
-
+  const { id } = useParams();    
+  
+  const selectedPokemon = pokemonList.find(pokemon => pokemon.id === parseInt(id));  
+  const isSelected = selectPokemonList.find(pokemon => pokemon.id === parseInt(id));
+  
+  const handleLocationBack = () => navigate('/dex');  
+  const handleLocationPrev = () => parseInt(selectedPokemon.id) === 1 ? alert("첫 번재 포켓몬 입니다!") : navigate(`/detail/${parseInt(selectedPokemon.id) - 1}`);
+  const handleLocationNext = () => parseInt(selectedPokemon.id) === pokemonList.length ? alert("마지막 포켓몬 입니다!") : navigate(`/detail/${parseInt(selectedPokemon.id) + 1}`);
+  const handleAddPokemon = (pokemon) => dispatch(addPokemon(pokemon));    
+  const handleRemovePokemon = (pokemon) => dispatch(removePokemon(pokemon));
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []); 
 
-  if (!selectedPokemon) {
-    return <div>포켓몬을 찾을 수 없슈.</div>;
-  }
-
-  const backHandler = () => {
-    navigate('/dex', {
-      state: {selectedPokemonList}
-    });
-  }
-  
   return (
     <>
       <SelectPokemonBox>
@@ -37,21 +35,36 @@ const Detail = () => {
           <div className="imgBox">
             <img src={selectedPokemon.img_url} alt={selectedPokemon.korean_name} />
           </div>
-          <div className="titBox">
-            <h2>{selectedPokemon.korean_name}</h2>
-            <p>{selectedPokemon.description}</p>
-          </div>        
-          <div className="dlBox">
-            <dl>
-              <dt>ID</dt>
-              <dd>{selectedPokemon.id}</dd>
-            </dl>
-            <dl>
-              <dt>TYPE</dt>
-              <dd>{selectedPokemon.types}</dd>
-            </dl>
-          </div>
-          <button onClick={backHandler}>뒤로가기</button>  
+          <div className='boxWrap'>
+            <div className="titBox">
+              <h2>{selectedPokemon.korean_name}</h2>
+              <p>{selectedPokemon.description}</p>
+            </div>        
+            <div className="dlBox">
+              <dl>
+                <dt>ID</dt>
+                <dd>{selectedPokemon.id}</dd>
+              </dl>
+              <dl>
+                <dt>TYPE</dt>
+                <dd>{selectedPokemon.types.length >= 2 ? (
+                  `${selectedPokemon.types[0]},${selectedPokemon.types[1]}`
+                ) : (
+                  selectedPokemon.types[0]
+                )}</dd>
+              </dl>
+            </div>
+          </div>          
+          {
+            isSelected ? (
+              <button className='btnAction btnRemove' onClick={()=> handleRemovePokemon(selectedPokemon)}>삭제</button>                    
+            ) : (
+              <button className='btnAction btnAdd' onClick={()=> handleAddPokemon(selectedPokemon)}>추가</button>      
+            )
+          }          
+          <button className='btnAction btnPrev' onClick={handleLocationPrev}>이전</button>
+          <button className='btnAction btnNext' onClick={handleLocationNext}>다음</button>
+          <button className='btnAction btnBack' onClick={handleLocationBack}>List</button>  
         </div>
       </SelectPokemonBox>          
     </>    
@@ -61,9 +74,8 @@ const Detail = () => {
 
 
 const SelectPokemonBox = styled.div`
-  width: 100%;
-  max-width:400px;  
-  margin:120px auto 0;  
+  max-width:645px;
+  margin: -80px auto;
   &:before {
     content:''; 
     position:fixed;
@@ -78,75 +90,135 @@ const SelectPokemonBox = styled.div`
   }  
   .inner {
     position: relative;
-    background:#f0f0f0;
-    border:3px solid #f5473c;
-    border-radius:10px;
+    /* background: #f0f0f0; */
+    width: 100%;
+    height: 780px;
+    background: url(${detailImg}) no-repeat center center;
+    background-size:cover;
     z-index: 1;
-    padding:0 30px 30px;
   }
   .imgBox {
-    position:relative;
-    top:-120px;
-    margin:0 0 -120px;
+    position:absolute;
+    top:110px;
+    right:145px;
     text-align:center;
     img {
       width:200px;
-    }
+    }    
+  }
+  .boxWrap {
+    position:absolute;
+    right:120px;
+    bottom:115px;  
+    width:100%;
+    max-width:262px;
   }
   .titBox {
     text-align:center;
     h2 {
-      font-size:30px;
+      font-size:24px;
       font-weight:bold;
       color:#212121;
-      margin:0 0 15px;
+      margin:0 0 10px;
     }
     p {
-      font-size:16px;
-      color:#858585;
+      font-size:14px;
+      color:#464646;
       word-break: keep-all;
     }
   }
   .dlBox {
     display:flex;
-    border-top:1px solid #cdcdcd;
-    border-bottom:1px solid #cdcdcd;
-    margin:15px auto;
-    padding:15px 0;
+    margin:10px auto;
+    padding:10px 0;
     dl {
       position:relative;
       width:50%;
       text-align:center;
+      padding:0 20px 0 0;
+      &:first-child {
+        padding:0 0 0 20px;
+      }
       &:first-child:before {
         content:'';
         position:absolute; 
         top:50%;
         right:0;
         width:1px;
-        height:30px;
+        height:40px;
         background: #999;
         transform:translateY(-50%);        
       }
       dt {
-        font-size:16px;
+        font-size:14px;        
+        border-bottom:1px solid #999;
         margin: 0 0 5px;
+        padding: 0 0 8px;        
       }
       dd {
-        font-size:26px
-      }
-    }    
+        font-size:18px
+      }      
+    }  
+      
   }
-  button {
-    width:100%;
-    font-size:18px;
-    background: #ffcc1c;
-    border:3px solid #456bbc;
-    padding:10px 0;
-    cursor:pointer;
-    &:hover {
-      background:#f5473c;
-      color:#fff;
-      transition:all .2s ease;
+  .btnAction {
+    position: absolute;    
+    right: 77px;
+    bottom: 107px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border:2px solid #2b71b7;
+    cursor: pointer;
+    &.btnAdd {
+      background:#a7f1a7;
+    }
+    &.btnRemove {
+      background:#ffaaaa;
+    }
+    &.btnBack {
+      width:38px;
+      height:38px;
+      bottom: 158px;
+      background:#ffcb04;
+      border-color:#2b71b7;
+    }
+    &.btnPrev {
+      top:0;
+      left:0;
+      bottom: auto;
+    }
+    &.btnNext {
+      top: 109px;
+      right: 71px;
+      bottom: auto;
+      width: 44px;
+      height: 207px;
+      border-radius: 0;      
+      border-color: #0e0e0e;
+      background: #2b292b;
+      color: white;
+      box-shadow: .5px .5px 10px #2b292b;
+      &:hover {
+        background:#ffcb04;
+        color:#000;
+      }      
+    }
+    &.btnPrev {
+      top: 109px;
+      left: 210px;
+      bottom: auto;
+      width: 44px;
+      height: 207px;
+      border-radius: 0;      
+      border-color: #0e0e0e;
+      background: #2b292b;
+      color: white;
+      box-shadow: .5px .5px 10px #2b292b;
+      &:hover {
+        background:#ffcb04;
+        color:#000;
+      }
     }
   }
 `;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Dashboard from "@/components/Dashboard";
 import PokemonList from "@/components/PokemonList";
-import bgImage from "/src/assets/img/bg-pokemon.jpg";
+import bgImage from "/src/assets/img/bg-pokemon.webp";
 import styled from "styled-components";
 import { ToastContainer } from 'react-toastify';
 
