@@ -1,18 +1,15 @@
 // import PokemonCard from '@/components/PokemonCard';
-import { pokemonContext } from '@/context/PokemonContext';
-import { useContext } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import bgImage from "/src/assets/img/bg-pokeball.jpg";
 import { useEffect } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import bgImage from "/src/assets/img/bg-pokeball.jpg";
+import styled from 'styled-components';
 
 const Detail = () => {
 
-  const {pokemonList} = useContext(pokemonContext);
+  const pokemonList = useSelector(state => state.pokemons.pokemonList);  
 
-  // URL에서 id를 추출
   const { id } = useParams();
-  // 선택된 포켓몬을 기억하기 위해 useLocation 훅 사용
   const location = useLocation();
   const navigate = useNavigate();
   const { selectedPokemonList } = location.state || {}  
@@ -77,7 +74,7 @@ const SelectPokemonBox = styled.div`
     background:url(${bgImage}) no-repeat;
     background-attachment : fixed;
     background-position: bottom right;
-    background-size:100% 100%;
+    background-size:cover;
   }  
   .inner {
     position: relative;

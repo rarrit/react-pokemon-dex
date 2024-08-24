@@ -52,6 +52,7 @@ const GlobalStyle = createGlobalStyle`
   }
   * {
     font-family: 'HSGooltokki', sans-serif !important;
+    box-sizing: border-box;
   }
   body {    
     min-height: 100vh;

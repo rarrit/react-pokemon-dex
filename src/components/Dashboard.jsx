@@ -1,13 +1,10 @@
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
-import { useContext } from "react";
-import { pokemonContext } from "@/context/PokemonContext";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const {
-    selectPokemonList,
-    removePokemon
-  } = useContext(pokemonContext);
+  const selectPokemonList = useSelector(state => state.pokemons.selectPokemonList);
+
   return (
     <>
       <DashboardContainer>
@@ -21,7 +18,6 @@ const Dashboard = () => {
                   <PokemonCard 
                     key={pokemon.id} 
                     pokemon={pokemon}         
-                    removePokemon={removePokemon}
                     isSelected={true}
                   />                  
                 )

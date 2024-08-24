@@ -1,23 +1,24 @@
-import { pokemonContext } from "@/context/PokemonContext";
-import { useEffect, useContext } from "react";
+import { setIsAnimation } from "@/feature/pokemons/pokemonsSlice";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
 
 
 const Home = () => {  
-  const {
-    isAnimation, setIsAnimation
-  } = useContext(pokemonContext);
+  const dispatch = useDispatch();
+  const isAnimation = useSelector(state => state.pokemons.isAnimation);
   const navigate = useNavigate();
 
-  const startAniHandler = () => setIsAnimation(true);
+
+  const startAniHandler = (isBoolean) => dispatch(setIsAnimation(isBoolean));
 
   useEffect(() => {
     if(isAnimation) {
       document.querySelector('body').classList.add('ani');
       const timer = setTimeout(() => {
         navigate('/dex');
-      }, 1000); // 2초 
+      }, 1000); 
       return () => {
         clearTimeout(timer);
         document.querySelector('body').classList.remove('ani');
@@ -31,7 +32,7 @@ const Home = () => {
       <button 
         id="btnStart" 
         className={isAnimation ? 'curr' : ''}
-        onClick={startAniHandler}
+        onClick={() => startAniHandler(true)}
       >
         <p>도감 등록</p>
       </button>

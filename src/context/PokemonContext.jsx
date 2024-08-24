@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { createContext } from "react";
-import Poketmon from "@/mock.js";
+import { ToastContainer, toast } from 'react-toastify';
+import pokemonList from "@/mock.js";
 
 
 export const pokemonContext = createContext();
 
 export const PokemonProvider = ({ children }) => {
-  const [pokemonList, setPokemonList] = useState(Poketmon);  
   const [isAnimation, setIsAnimation] = useState(false);
   const [selectPokemonList, setSelectPokemonList] = useState(() => {    
     const savedList = localStorage.getItem('selectPokemonList');    
@@ -20,6 +20,7 @@ export const PokemonProvider = ({ children }) => {
         return prevSelectPokemonList;
       }
       if(prevSelectPokemonList.length < 6) {
+        toast(`"${selectedPokemon.korean_name}" 이(가) 추가되었습니다 !`);
         return [...prevSelectPokemonList, selectedPokemon];
       }else{
         alert("포켓몬이 꽉 차버렸슈. 등록은 불가능하오!");
@@ -28,15 +29,15 @@ export const PokemonProvider = ({ children }) => {
     })
   };
 
-
   const removePokemonHandler = (selectedPokemon) => {
+    toast(`"${selectedPokemon.korean_name}" 이(가) 삭제되었습니다 !`);
     setSelectPokemonList(prevSelectPokemonList => prevSelectPokemonList.filter(prevSelectedPokemon => prevSelectedPokemon !== selectedPokemon))
   }
     
   return (
     <pokemonContext.Provider value={{
+      ToastContainer,
       pokemonList, 
-      setPokemonList, 
       isAnimation, 
       setIsAnimation,
       selectPokemonList,
