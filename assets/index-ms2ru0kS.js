@@ -324,7 +324,7 @@ Error generating stack: `+i.message+`
   display:flex;
   flex-wrap:wrap;
   gap:20px;
-`,Kv="/assets/bg-pokemon-CjCUSoLq.jpg",Yv=()=>{const e=mr(t=>t.pokemons.selectPokemonList);return E.useEffect(()=>{localStorage.setItem("selectPokemonList",JSON.stringify(e))},[e]),I.jsxs(Gv,{children:[I.jsx(Wv,{}),I.jsx(Vv,{}),I.jsx(lv,{})]})},Gv=Ke.div`
+`,Kv="/react-pokemon-dex/assets/bg-pokemon-CjCUSoLq.jpg",Yv=()=>{const e=mr(t=>t.pokemons.selectPokemonList);return E.useEffect(()=>{localStorage.setItem("selectPokemonList",JSON.stringify(e))},[e]),I.jsxs(Gv,{children:[I.jsx(Wv,{}),I.jsx(Vv,{}),I.jsx(lv,{})]})},Gv=Ke.div`
   &:before {
     content:''; 
     position:fixed;
@@ -337,7 +337,7 @@ Error generating stack: `+i.message+`
     background-position: bottom right;
     background-size:100% 100%;
   }  
-`,Xv="/assets/logo-pokemon-Blf-r-mI.png";function Zv(){return I.jsx(I.Fragment,{children:I.jsx(ek,{id:"header",children:I.jsx("div",{className:"inner",children:I.jsx("h1",{className:"logo",children:I.jsx(a1,{to:"/dex",children:I.jsx("img",{src:Xv})})})})})})}function Jv(){return I.jsx(I.Fragment,{children:I.jsx(tk,{id:"footer",children:I.jsx("div",{className:"inner",children:I.jsx("p",{})})})})}const qv=({children:e})=>I.jsxs(I.Fragment,{children:[I.jsx(Zv,{}),I.jsx("div",{id:"wrap",children:I.jsx("div",{id:"container",children:I.jsx("div",{id:"contents",children:e})})}),I.jsx(Jv,{})]}),ek=Ke.header`
+`,Xv="/react-pokemon-dex/assets/logo-pokemon-Blf-r-mI.png";function Zv(){return I.jsx(I.Fragment,{children:I.jsx(ek,{id:"header",children:I.jsx("div",{className:"inner",children:I.jsx("h1",{className:"logo",children:I.jsx(a1,{to:"/dex",children:I.jsx("img",{src:Xv})})})})})})}function Jv(){return I.jsx(I.Fragment,{children:I.jsx(tk,{id:"footer",children:I.jsx("div",{className:"inner",children:I.jsx("p",{})})})})}const qv=({children:e})=>I.jsxs(I.Fragment,{children:[I.jsx(Zv,{}),I.jsx("div",{id:"wrap",children:I.jsx("div",{id:"container",children:I.jsx("div",{id:"contents",children:e})})}),I.jsx(Jv,{})]}),ek=Ke.header`
   .inner {
     display:flex;
     justify-content:center;
@@ -350,7 +350,7 @@ Error generating stack: `+i.message+`
   }  
 `,tk=Ke.footer`
 
-`,nk="/assets/bg-pokeball-CEcJe3ox.jpg",rk=()=>{const e=mr(l=>l.pokemons.pokemonList),{id:t}=Fy(),n=ko(),r=ms(),{selectedPokemonList:o}=n.state||{},i=e.find(l=>l.id===parseInt(t));if(E.useEffect(()=>{window.scrollTo(0,0)},[]),!i)return I.jsx("div",{children:"포켓몬을 찾을 수 없슈."});const s=()=>{r("/dex",{state:{selectedPokemonList:o}})};return I.jsx(I.Fragment,{children:I.jsx(ok,{children:I.jsxs("div",{className:"inner",children:[I.jsx("div",{className:"imgBox",children:I.jsx("img",{src:i.img_url,alt:i.korean_name})}),I.jsxs("div",{className:"titBox",children:[I.jsx("h2",{children:i.korean_name}),I.jsx("p",{children:i.description})]}),I.jsxs("div",{className:"dlBox",children:[I.jsxs("dl",{children:[I.jsx("dt",{children:"ID"}),I.jsx("dd",{children:i.id})]}),I.jsxs("dl",{children:[I.jsx("dt",{children:"TYPE"}),I.jsx("dd",{children:i.types})]})]}),I.jsx("button",{onClick:s,children:"뒤로가기"})]})})})},ok=Ke.div`
+`,nk="/react-pokemon-dex/assets/bg-pokeball-CEcJe3ox.jpg",rk=()=>{const e=mr(l=>l.pokemons.pokemonList),{id:t}=Fy(),n=ko(),r=ms(),{selectedPokemonList:o}=n.state||{},i=e.find(l=>l.id===parseInt(t));if(E.useEffect(()=>{window.scrollTo(0,0)},[]),!i)return I.jsx("div",{children:"포켓몬을 찾을 수 없슈."});const s=()=>{r("/dex",{state:{selectedPokemonList:o}})};return I.jsx(I.Fragment,{children:I.jsx(ok,{children:I.jsxs("div",{className:"inner",children:[I.jsx("div",{className:"imgBox",children:I.jsx("img",{src:i.img_url,alt:i.korean_name})}),I.jsxs("div",{className:"titBox",children:[I.jsx("h2",{children:i.korean_name}),I.jsx("p",{children:i.description})]}),I.jsxs("div",{className:"dlBox",children:[I.jsxs("dl",{children:[I.jsx("dt",{children:"ID"}),I.jsx("dd",{children:i.id})]}),I.jsxs("dl",{children:[I.jsx("dt",{children:"TYPE"}),I.jsx("dd",{children:i.types})]})]}),I.jsx("button",{onClick:s,children:"뒤로가기"})]})})})},ok=Ke.div`
   width: 100%;
   max-width:400px;  
   margin:120px auto 0;  
