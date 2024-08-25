@@ -33,8 +33,8 @@ const DexWrap = styled.div`
     height:100vh;
     background:url(${bgImage}) no-repeat;
     background-attachment : fixed;
-    background-position: bottom right;
-    background-size:100% 100%;
+    background-position: center center;
+    background-size:cover;
   }  
 `;
 export default Dex

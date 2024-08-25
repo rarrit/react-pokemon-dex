@@ -55,6 +55,13 @@ const Detail = () => {
       <SelectPokemonBox>
         <div className="inner">
           <div className="imgBox">
+            {
+              isSelected ? (
+                <button onClick={()=> handleRemovePokemon(selectedPokemon)}></button>                    
+              ) : (
+                <button onClick={()=> handleAddPokemon(selectedPokemon)}></button>      
+              )
+            }     
             <img src={selectedPokemon.img_url} alt={selectedPokemon.korean_name} />
           </div>
           <div className='boxWrap'>
@@ -144,6 +151,16 @@ const SelectPokemonBox = styled.div`
     img {
       width:200px;
     }    
+    button {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+    }
   }
   .boxWrap {
     position:absolute;
@@ -278,27 +295,34 @@ const FixedListBtn = styled.button`
   }
 `;
 const FixedList = styled.div`
-  position:fixed;  
-  left:0;
-  bottom:-280px;
-  width:100%;
-  height: auto;  
+  position:fixed;    
+  top: 0;
+  left: -165px;
+  width: 180px;
+  height: 100vh;  
   transition:all .5s ease;
   .inner {   
     display:flex; 
     align-items: center;
     justify-content: center;
+    flex-direction:column;
+    height:100%;
     gap: 10px;
     > div {
       position:relative;
-      transition: all .5s ease;
-      &:hover {
-        transform:translateY(-140px);
+      transition: all .35s ease;
+      transform:rotate(90deg);      
+      & + div {
+        margin:-150px 0 0 0;
       }
     }
   }
   &.active {
-    bottom: -120px;
+    transform:translateX(150px);
+    .inner > div:hover {
+      z-index:10;
+      transform:rotate(0) translateX(80px);
+    }
   }
 `;
 
