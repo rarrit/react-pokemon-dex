@@ -33,17 +33,18 @@ export default Dashboard
 
 const DashboardContainer = styled.div`
   position:relative;
-  border:1px solid #2a74b9;
-  padding:4px;
+  box-shadow:.5px .5px 10px #2a74b9;
+  padding:10px;
   border-radius: 20px;  
   margin: 0 0 40px;
   .dashList {
     display:flex;
     justify-content: center;
     gap:10px;
-    background:rgba(255,255,255,.5);
+    background:#272727;
+    border:1px solid #ffcb04;
     padding:25px;
     border-radius:20px;
-    > p {font-size:30px;}
+    > p {font-size:30px; color:#999;}
   }
 `;
