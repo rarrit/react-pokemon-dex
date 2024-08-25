@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import logo from "@/assets/img/logo-pokemon.png";
 import { Link } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 
 function Header(){
   return (
@@ -14,6 +15,7 @@ function Header(){
           </h1>
         </div>
       </HeaderLayout>
+      
     </>
   );
 }
@@ -43,6 +45,7 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </div>
+      <ToastContainer />
       <Footer/>
     </>
   )

@@ -4,7 +4,7 @@ import Dashboard from "@/components/Dashboard";
 import PokemonList from "@/components/PokemonList";
 import bgImage from "/src/assets/img/bg-pokemon.webp";
 import styled from "styled-components";
-import { ToastContainer } from 'react-toastify';
+
 
 const Dex = () => {
 
@@ -18,8 +18,7 @@ const Dex = () => {
   return (
     <DexWrap>
       <Dashboard/>
-      <PokemonList/>  
-      <ToastContainer />
+      <PokemonList/>        
     </DexWrap>   
   )
 }

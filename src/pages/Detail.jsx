@@ -1,18 +1,21 @@
 // import PokemonCard from '@/components/PokemonCard';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {  useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import bgImage from "/src/assets/img/bg-pokeball.jpg";
 import detailImg from "/src/assets/img/bg-pokemon-detail.png";
 import styled from 'styled-components';
 import { addPokemon, removePokemon } from "@/feature/pokemons/pokemonsSlice";
+import PokemonCard from '@/components/PokemonCard';
+import { toast } from 'react-toastify';
 
 const Detail = () => {
 
   const pokemonList = useSelector(state => state.pokemons.pokemonList);  
-  const selectPokemonList = useSelector(state => state.pokemons.selectPokemonList);
+  const selectPokemonList = useSelector(state => state.pokemons.selectPokemonList);  
   const dispatch = useDispatch();    
   const navigate = useNavigate();
+  const isActive = useRef("active");
   const { id } = useParams();    
   
   const selectedPokemon = pokemonList.find(pokemon => pokemon.id === parseInt(id));  
@@ -23,7 +26,26 @@ const Detail = () => {
   const handleLocationNext = () => parseInt(selectedPokemon.id) === pokemonList.length ? alert("마지막 포켓몬 입니다!") : navigate(`/detail/${parseInt(selectedPokemon.id) + 1}`);
   const handleAddPokemon = (pokemon) => dispatch(addPokemon(pokemon));    
   const handleRemovePokemon = (pokemon) => dispatch(removePokemon(pokemon));
-  
+  const handleOpenSelectedList = () => {
+    if(selectPokemonList.length === 0){
+      return toast.error(`리스트에 포켓몬이 없습니다.`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",              
+      });  
+    }
+    if(isActive.current.classList.contains("active")){
+      isActive.current.classList.remove("active");
+    }else{
+      isActive.current.classList.add("active");
+    }
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []); 
@@ -65,8 +87,25 @@ const Detail = () => {
           <button className='btnAction btnPrev' onClick={handleLocationPrev}>이전</button>
           <button className='btnAction btnNext' onClick={handleLocationNext}>다음</button>
           <button className='btnAction btnBack' onClick={handleLocationBack}>List</button>  
+          <FixedListBtn className='btnListAll' onClick={handleOpenSelectedList}>SELECTED LIST<br/>TOGGLE</FixedListBtn>
         </div>
-      </SelectPokemonBox>          
+      </SelectPokemonBox>   
+
+      <FixedList className='fixedList' ref={isActive}>
+        <div className='inner'>
+          {
+            selectPokemonList.map(list => {
+              return (
+                <PokemonCard 
+                  key={list.id}
+                  pokemon={list}
+                />
+              )
+            })
+          }
+        </div>
+      </FixedList>
+      
     </>    
   );
 };
@@ -220,6 +259,46 @@ const SelectPokemonBox = styled.div`
         color:#000;
       }
     }
+  }
+`;
+
+const FixedListBtn = styled.button`
+  position: absolute;
+  left: 94px;
+  bottom: 120px;
+  width: 150px;
+  height: 150px;
+  color:#fff;
+  border-radius: 100%;
+  background:transparent;
+  border:none;  
+  cursor:pointer;
+  &:hover {
+    background:rgba(0,0,0,.15);
+  }
+`;
+const FixedList = styled.div`
+  position:fixed;  
+  left:0;
+  bottom:-280px;
+  width:100%;
+  height: auto;  
+  transition:all .5s ease;
+  .inner {   
+    display:flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    > div {
+      position:relative;
+      transition: all .5s ease;
+      &:hover {
+        transform:translateY(-140px);
+      }
+    }
+  }
+  &.active {
+    bottom: -120px;
   }
 `;
 
