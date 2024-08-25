@@ -32,7 +32,10 @@ const PokemonCard = ({ pokemon  }) => {
         </TextBox>        
         <ButtonArea>
           <div className="inner">
-            <Button onClick={() => handleDetailClick()}>자세히 보기</Button>
+            <Button onClick={(e) => {              
+              e.stopPropagation();
+              handleDetailClick();
+            }}>자세히 보기</Button>
           </div>          
         </ButtonArea>
         
