@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import Dashboard from "@/components/Dashboard";
 import PokemonList from "@/components/PokemonList";
 import bgImage from "/src/assets/img/bg-pokemon.webp";
@@ -7,19 +5,11 @@ import styled from "styled-components";
 
 
 const Dex = () => {
-
-  // selectPokemonList 가져오기
-  const selectPokemonList = useSelector(state => state.pokemons.selectPokemonList);
-  
-  useEffect(() => {
-    localStorage.setItem('selectPokemonList', JSON.stringify(selectPokemonList))
-  }, [selectPokemonList])  
-
   return (
     <DexWrap>
-      <Dashboard/>
-      <PokemonList/>        
-    </DexWrap>   
+      <Dashboard />
+      <PokemonList />
+    </DexWrap>
   )
 }
 
