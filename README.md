@@ -36,34 +36,34 @@
 
 
 ## :three: 프로젝트 구조
-📦src
- ┣ 📂assets
- ┃ ┣ 📂img
- ┃ ┃ ┣ 📂bg
- ┃ ┣ 📂js
- ┃ ┃ ┗ 📜types.js
- ┃ ┗ 📜react.svg
- ┣ 📂components
- ┃ ┣ 📜Dashboard.jsx
- ┃ ┣ 📜GlobalStyle.jsx
- ┃ ┣ 📜PokemonCard.jsx
- ┃ ┗ 📜PokemonList.jsx
- ┣ 📂feature
- ┃ ┗ 📂pokemons
- ┃ ┃ ┗ 📜pokemonsSlice.js
- ┣ 📂pages
- ┃ ┣ 📜Detail.jsx
- ┃ ┣ 📜Dex.jsx
- ┃ ┗ 📜Home.jsx
- ┣ 📂shared
- ┃ ┣ 📜Layout.jsx
- ┃ ┗ 📜Router.jsx
- ┣ 📂store
- ┃ ┗ 📜index.js
- ┣ 📜App.css
- ┣ 📜App.jsx
- ┣ 📜index.css
- ┣ 📜main.jsx
+📦src<br/>
+ ┣ 📂assets<br/>
+ ┃ ┣ 📂img<br/>
+ ┃ ┃ ┣ 📂bg<br/>
+ ┃ ┣ 📂js<br/>
+ ┃ ┃ ┗ 📜types.js<br/>
+ ┃ ┗ 📜react.svg<br/>
+ ┣ 📂components<br/>
+ ┃ ┣ 📜Dashboard.jsx<br/>
+ ┃ ┣ 📜GlobalStyle.jsx<br/>
+ ┃ ┣ 📜PokemonCard.jsx<br/>
+ ┃ ┗ 📜PokemonList.jsx<br/>
+ ┣ 📂feature<br/>
+ ┃ ┗ 📂pokemons<br/>
+ ┃ ┃ ┗ 📜pokemonsSlice.js<br/>
+ ┣ 📂pages<br/>
+ ┃ ┣ 📜Detail.jsx<br/>
+ ┃ ┣ 📜Dex.jsx<br/>
+ ┃ ┗ 📜Home.jsx<br/>
+ ┣ 📂shared<br/>
+ ┃ ┣ 📜Layout.jsx<br/>
+ ┃ ┗ 📜Router.jsx<br/>
+ ┣ 📂store<br/>
+ ┃ ┗ 📜index.js<br/>
+ ┣ 📜App.css<br/>
+ ┣ 📜App.jsx<br/>
+ ┣ 📜index.css<br/>
+ ┣ 📜main.jsx<br/>
  ┗ 📜mock.js
 
 ## :four: 주요 기능
@@ -93,9 +93,9 @@
 
 
 ## :five: 실행
-`git clone`: 폴더 복사
-`npm install -g yarn`: yarn 설치
-`yarn dev`: 로컬에서 프로젝트 실행
+- `git clone`: 폴더 복사
+- `npm install -g yarn`: yarn 설치
+- `yarn dev`: 로컬에서 프로젝트 실행
 
 ## :Fire: 회고
 이번 과제를 진행하며, 리액트에 조금 더 친숙해진 것 같았다. 이전에는 prop-drilling 으로만 작업했었는데, 이번 과제를 통해 context API로 리팩토링을 해보며 왜 사용하는지 직접 편리함을 느끼게 되었고 RTK로 리팩토링하며 context API 와 RTK의 차이점에 대해 이해할 수 있었다.
