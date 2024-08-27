@@ -7,19 +7,19 @@ import { pokemonContext } from "@/context/PokemonContext";
 
 const Dex = () => {
 
-  const { 
-    selectPokemonList, 
+  const {
+    selectPokemonList,
   } = useContext(pokemonContext);
 
   useEffect(() => {
     localStorage.setItem('selectPokemonList', JSON.stringify(selectPokemonList))
-  }, [selectPokemonList])  
+  }, [selectPokemonList])
 
   return (
     <DexWrap>
-      <Dashboard/>
-      <PokemonList/>  
-    </DexWrap>   
+      <Dashboard />
+      <PokemonList />
+    </DexWrap>
   )
 }
 

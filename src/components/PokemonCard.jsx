@@ -5,7 +5,7 @@ import { TypeAttr, TypeBg } from "../assets/js/types";
 import styled from "styled-components";
 
 
-const PokemonCard = ({ 
+const PokemonCard = ({
   pokemon, // 포켓몬 객체
   selectPokemonList, // 선택된 포켓몬 리스트
 }) => {
@@ -16,12 +16,12 @@ const PokemonCard = ({
   } = useContext(pokemonContext);
 
   const filterType = TypeAttr(pokemon.types[0]);
-  const pokemonBg = TypeBg(filterType);  
+  const pokemonBg = TypeBg(filterType);
 
   // 상세페이지로 이동되었을 때 이전 selectedPokemonList 상태 유지
   const navigate = useNavigate();
   const handleDetailClick = () => {
-    
+
     navigate(`/detail/${pokemon.id}`, {
       state: {
         selectedPokemon: pokemon,
@@ -39,7 +39,7 @@ const PokemonCard = ({
         <TextBox>
           <p className="pokemonName">{pokemon.korean_name}</p>
           <p className="pokemonDesc">{pokemon.description}</p>
-        </TextBox>        
+        </TextBox>
         <ButtonArea>
           <div className="inner">
             <button onClick={handleDetailClick}>DETAIL</button>
@@ -48,9 +48,9 @@ const PokemonCard = ({
             ) : (
               <Button onClick={() => addPokemonHandler(pokemon)}>ADD</Button>
             )}
-          </div>          
+          </div>
         </ButtonArea>
-        
+
       </CardItem>
     </>
   )
