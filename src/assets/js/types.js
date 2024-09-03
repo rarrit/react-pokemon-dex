@@ -38,36 +38,36 @@ export const TypeAttr = (type) => {
 export const TypeBg = (type) => {
   switch (type) {
     case "fire":
-      return "/src/assets/img/bg/fire.png";
+      return "/assets/img/bg/fire.png";
     case "water":
-      return "/src/assets/img/bg/water.png";
+      return "/assets/img/bg/water.png";
     case "grass":
-      return "/src/assets/img/bg/grass.png";
+      return "/assets/img/bg/grass.png";
     case "electric":
-      return "/src/assets/img/bg/electric.png";
+      return "/assets/img/bg/electric.png";
     case "bug":
-      return "/src/assets/img/bg/bug.png";
+      return "/assets/img/bg/bug.png";
     case "fight":
-      return "/src/assets/img/bg/fight.png";
+      return "/assets/img/bg/fight.png";
     case "poison":
-      return "/src/assets/img/bg/poison.png";
+      return "/assets/img/bg/poison.png";
     case "ground":
-      return "/src/assets/img/bg/ground.png";
+      return "/assets/img/bg/ground.png";
     case "rock":
-      return "/src/assets/img/bg/rock.png";
+      return "/assets/img/bg/rock.png";
     case "fly":
-      return "/src/assets/img/bg/fly.png";
+      return "/assets/img/bg/fly.png";
     case "esper":
-      return "/src/assets/img/bg/esper.png";
+      return "/assets/img/bg/esper.png";
     case "ghost":
-      return "/src/assets/img/bg/ghost.png";
+      return "/assets/img/bg/ghost.png";
     case "ice":
-      return "/src/assets/img/bg/ice.png";
+      return "/assets/img/bg/ice.png";
     case "dragon":
-      return "/src/assets/img/bg/dragon.png";
+      return "/assets/img/bg/dragon.png";
     case "fairy":
-      return "/src/assets/img/bg/fairy.png";
+      return "/assets/img/bg/fairy.png";
     default:
-      return "/src/assets/img/bg/normal.png";
+      return "/assets/img/bg/normal.png";
   }
 };

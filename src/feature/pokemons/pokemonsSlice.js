@@ -21,20 +21,58 @@ const pokemonsSlice = createSlice({
       const selectedPokemon = action.payload;
       const isCheck = state.selectPokemonList.some(list => list.id === selectedPokemon.id)
       if(isCheck){
-        alert("이미 등록된 포켓몬 입니다만?");
+        toast.error('🦄 이미 등록된 포켓몬입니다!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         return;
       }
       if(state.selectPokemonList.length < 6){
         state.selectPokemonList.push(selectedPokemon);
-        toast(`"${selectedPokemon.korean_name}" 이(가) 추가되었습니다 !`);
+        toast.success(`"${selectedPokemon.korean_name}" 이(가) 추가되었습니다 !`, {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }else{
-        alert("포켓몬이 꽉 차버렸습니다만?")
+        toast.warn('포켓몬이 꽉 차버렸습니다! ', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        window.scrollTo(0, 0);
       }
     },
     removePokemon(state, action) {
-      const selectedPokemon = action.payload;
-      state.selectPokemonList = state.selectPokemonList.filter(list => list.id !== selectedPokemon.id);
-      toast(`"${selectedPokemon.korean_name}" 이(가) 삭제되었습니다 !`);
+      const selectedPokemon = action.payload;                      
+      state.selectPokemonList = state.selectPokemonList.filter(list => list.id !== selectedPokemon.id);    
+      toast.error(`"${selectedPokemon.korean_name}" 이(가) 삭제되었습니다 !`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",              
+      });  
+      
     }
 
   }
