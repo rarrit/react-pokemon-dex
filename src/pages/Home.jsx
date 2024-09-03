@@ -68,7 +68,7 @@ const HomeWrap = styled.div`
     top:50%;
     left:0;
     width:100%;
-    height:20px;
+    height:40px;
     background:#000;
     transform:translateY(-50%);
   }
@@ -82,7 +82,7 @@ const HomeWrap = styled.div`
     font-size:36px;
     border-radius:100%;
     background:#f2f2f2;
-    border:10px solid #000;
+    border:20px solid #000;
     cursor: pointer;
     transform: translate(-50%,-50%);    
     p {

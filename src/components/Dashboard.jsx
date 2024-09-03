@@ -17,8 +17,7 @@ const Dashboard = () => {
                 return (
                   <PokemonCard 
                     key={pokemon.id} 
-                    pokemon={pokemon}         
-                    isSelected={true}
+                    pokemon={pokemon}        
                   />                  
                 )
               })
@@ -34,30 +33,18 @@ export default Dashboard
 
 const DashboardContainer = styled.div`
   position:relative;
-  background:#f5473c;
-  padding:5px;
+  box-shadow:.5px .5px 10px #2a74b9;
+  padding:10px;
   border-radius: 20px;  
   margin: 0 0 40px;
-  &:before {
-    content:'My Pokemon List';
-    position:absolute;
-    top:-50px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:40px;
-    color:#ffcc1c;
-    background:#456bbc;
-    border:5px solid #ffcc1c;
-    border-radius: 20px;
-    padding:15px 80px;    
-  }
   .dashList {
     display:flex;
     justify-content: center;
     gap:10px;
-    background:#fff;
-    padding:50px;
+    background:#272727;
+    border:1px solid #ffcb04;
+    padding:25px;
     border-radius:20px;
-    > p {font-size:30px;}
+    > p {font-size:30px; color:#999;}
   }
 `;
