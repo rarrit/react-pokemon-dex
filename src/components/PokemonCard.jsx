@@ -1,27 +1,22 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { pokemonContext } from "@/context/PokemonContext";
 import { TypeAttr, TypeBg } from "../assets/js/types";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { addPokemon, removePokemon } from "@/feature/pokemons/pokemonsSlice";
 
 
-const PokemonCard = ({
+const PokemonCard = ({ 
   pokemon, // 포켓몬 객체
-  selectPokemonList, // 선택된 포켓몬 리스트
+  isSelected // 추가 여부 체크
 }) => {
-  const {
-    addPokemonHandler, // 포켓몬 추가 함수
-    removePokemonHandler, // 포켓몬 삭제 함수  
-    isSelected // 추가 여부 체크
-  } = useContext(pokemonContext);
 
+  const dispatch = useDispatch();
+  const selectPokemonList = useSelector(state => state.pokemons.selectedPokemonList);
   const filterType = TypeAttr(pokemon.types[0]);
-  const pokemonBg = TypeBg(filterType);
-
-  // 상세페이지로 이동되었을 때 이전 selectedPokemonList 상태 유지
+  const pokemonBg = TypeBg(filterType);    
   const navigate = useNavigate();
-  const handleDetailClick = () => {
-
+  
+  const handleDetailClick = () => {    
     navigate(`/detail/${pokemon.id}`, {
       state: {
         selectedPokemon: pokemon,
@@ -29,6 +24,15 @@ const PokemonCard = ({
       },
     });
   };
+
+  const handleAddPokemon = (pokemon) => {
+    dispatch(addPokemon(pokemon));
+    // console.log("추가", pokemon);
+  }
+  const handleRemovePokemon = (pokemon) => {
+    dispatch(removePokemon(pokemon));
+  }
+
 
   return (
     <>
@@ -39,18 +43,18 @@ const PokemonCard = ({
         <TextBox>
           <p className="pokemonName">{pokemon.korean_name}</p>
           <p className="pokemonDesc">{pokemon.description}</p>
-        </TextBox>
+        </TextBox>        
         <ButtonArea>
           <div className="inner">
             <button onClick={handleDetailClick}>DETAIL</button>
             {isSelected ? (
-              <Button onClick={() => removePokemonHandler(pokemon)}>REMOVE</Button>
+              <Button onClick={() => handleRemovePokemon(pokemon)}>REMOVE</Button>
             ) : (
-              <Button onClick={() => addPokemonHandler(pokemon)}>ADD</Button>
+              <Button onClick={() => handleAddPokemon(pokemon)}>ADD</Button>
             )}
-          </div>
+          </div>          
         </ButtonArea>
-
+        
       </CardItem>
     </>
   )

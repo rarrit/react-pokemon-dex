@@ -1,25 +1,26 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Dashboard from "@/components/Dashboard";
 import PokemonList from "@/components/PokemonList";
-import styled from "styled-components";
 import bgImage from "/src/assets/img/bg-pokemon.jpg";
-import { pokemonContext } from "@/context/PokemonContext";
+import styled from "styled-components";
+import { ToastContainer } from 'react-toastify';
 
 const Dex = () => {
 
-  const {
-    selectPokemonList,
-  } = useContext(pokemonContext);
-
+  // selectPokemonList 가져오기
+  const selectPokemonList = useSelector(state => state.pokemons.selectPokemonList);
+  
   useEffect(() => {
     localStorage.setItem('selectPokemonList', JSON.stringify(selectPokemonList))
-  }, [selectPokemonList])
+  }, [selectPokemonList])  
 
   return (
     <DexWrap>
-      <Dashboard />
-      <PokemonList />
-    </DexWrap>
+      <Dashboard/>
+      <PokemonList/>  
+      <ToastContainer />
+    </DexWrap>   
   )
 }
 

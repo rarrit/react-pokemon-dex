@@ -52,13 +52,14 @@ const GlobalStyle = createGlobalStyle`
   }
   * {
     font-family: 'HSGooltokki', sans-serif !important;
+    box-sizing: border-box;
   }
   body {    
     min-height: 100vh;
     padding-top:150px;
   }
   header {
-    position: fixed;
+    position: absolute;
     top:0;
     left:0;
     width:100%;
