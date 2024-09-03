@@ -8,13 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-<<<<<<< HEAD
     "predeploy": "npm run build",  
     "deploy": "gh-pages -d dist"  
-=======
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
->>>>>>> f958278f39a8966a58a291fa0dc1f1dd5be7a0e4
   },
   "homepage": "https://rarrit.github.io/react-pokemon-dex/",
   "dependencies": {
